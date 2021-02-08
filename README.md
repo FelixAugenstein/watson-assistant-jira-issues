@@ -8,10 +8,65 @@
 3. After you submit your registration, you will receive an e-mail from the IBM Cloud team with details about your account. In this e-mail, you will need to click the link provided to confirm your registration.
 4. Now you should be able to login to your new IBM Cloud account ;-)
 5. [Download Postman](https://www.postman.com/downloads/), a programm we will need to work with the Jira API.
+6. If you haven't done so already, [sign up for Jira](https://www.atlassian.com/software/jira), you can use the free version.
 
 ## Set up your Jira Account
 
+1. You will be required to set up your domain, for instance https://my-domain-name.atlassian.net.
+2. Then you can set up projects. Create a project an make sure to find out the project ID. It can be found by going to view all projects and inspecting the element, the corresponding project ID is in the image.
+ - For the first created project the ID is usually 10000
+ - For the second created project the ID is usually 10001
+ - ...
 
+![JIRA Project ID](readme_images/jira-project-id.png)
+
+3. Finally, you need to create a new API token. Therefore, go to Account Settings --> Security --> Create and manage API tokens, then create a new API token. Choose a label, copy the generated token and save it for later.
+
+
+## Use Postman to test the Jira API with your project
+
+Now it is time to create our first issue via Postman and the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/). The corresponding documentation can be found [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-post).
+
+![Postman Test](readme_images/postman-test.png)
+
+1. Create a new collection and call it for instance Jira.
+2. Add a new request.
+3. Select POST to make a new Post Request and provide the correct endpoint to create a new issue, with your specific domain: `https://YOUR_NAME_HERE.atlassian.net/rest/api/3/issue/`.
+4. Under Authorization select Basic Auth as type and provide your email you used to register as the username and your created API token as password.
+5. Then go to Body, select raw and paste in the following code. Make sure to provide your correct project ID. 
+
+```
+{
+    "fields": {
+        "project": {
+            "id": "YOUR_PROJECT_ID_HERE"
+        },
+        "issuetype": {
+            "id": "10003"
+        },
+        "summary": "New Bug created via Postman",
+        "description": {
+            "type": "doc",
+            "version": 1,
+            "content": [
+                {
+                "type": "paragraph",
+                "content": [
+                    {
+                    "text": "Description of the Bug created via Postman",
+                    "type": "text"
+                    }
+                ]
+                }
+            ]
+        }
+    }
+  }
+```
+
+6. Click Send.
+
+If you get a 201 Created response you should be able to see the new issue in your backlog inside your Jira project.
 
 ## Set up the cloud function
 
