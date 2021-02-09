@@ -89,7 +89,7 @@ Copy and paste the `create-jira-issue.js` code. Now you need to provide some pro
 - Header Cookie
 - Project ID
 
-Check all the lines in the code where it says 'YOUR INPUT REQUIRED HERE' and provide these 4 properties.
+Check all the lines in the code where it says 'YOUR INPUT REQUIRED HERE' and provide those 4 properties.
 
 ![Provide your data](readme_images/provide-your-data.png)
 
@@ -103,10 +103,7 @@ Now you can test your Cloud Function to make sure everything works fine. Therefo
 }
 ```
 
-![Test Cloud Function](readme_images/test-cloud-function.png)
-
-After testing you should see a new entry generated in your Cloudant database.
-Go to Endpoints, enable it as a Web Action, save and copy the provided URL. You will need it later on, when setting up your Watson Assistant.
+Now go to Endpoints, enable it as a Web Action, save and copy the provided URL. You will need it later on, when setting up your Watson Assistant.
 
 ![Create Endpoint Web Action](readme_images/create-endpoint-web-action.png)
 
