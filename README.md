@@ -72,32 +72,34 @@ One more step: After the successful Post Request, click the code button in Postm
 
 ![Native NodeJS Code](readme_images/native-nodeJS-code.png)
 
-## Set up the cloud function
+## Set up the Cloud Function
 
-Go back to your IBM Cloud Dashboard. Click the Cloud Functions button, then go to Actions and click create, to create a new action.
+In your IBM Cloud account go to IBM Cloud Dashboard. Click the Cloud Functions button, then go to Actions and click create, to create a new action.
 
 ![Cloud Functions Button](readme_images/cloud-functions-button.png)
 
-Give your action a name, keep the Default Package and choose Node.js as your runtime. Click create.
+Give your action a name, keep the Default Package and choose Node.js - for instance 10 or 12 - as your runtime. Click create.
 
 ![Create Cloud Function Action](readme_images/create-cloud-function.png)
 
-Copy and paste the `create-jira-issue.js` code. Now you need to provide some elements from the native Node.Js code you copied from Postman:
+Copy and paste the `create-jira-issue.js` code. Now you need to provide some properties from the native Node.Js code you copied from Postman:
 
-- The correct hostname
-- The header Authorization
-- The header Cookie
+- Correct hostname
+- Header Authorization
+- Header Cookie
+- Project ID
+
+Check all the lines in the code where it says 'YOUR INPUT REQUIRED HERE' and provide these 4 properties.
 
 ![Provide your data](readme_images/provide-your-data.png)
 
-Now you can test your Cloud Function to make sure everything works fine. Therefore save it and click Invoke with Parameters, provide the input below, and click Apply, then click Invoke. Results are shown in the Activations pane. (HD in the description stands for help desk).
+Now you can test your Cloud Function to make sure everything works fine. Therefore, save it and click Invoke with Parameters, provide the input below, and click Apply, then click Invoke. Results are shown in the Activations pane. In Jira your new issue should be created.
 
 ```
 {
-  "ticketOperation": "createTicket",
-  "ticketStatus": "open", 
-  "ticketDescription": "HD my email is not working",
-  "ticketContact": "email@example.com"
+  "jiraIssueType": "10002",
+  "jiraIssueSummary": "New Task created via IBM Cloud Function", 
+  "jiraIssueDescription": "Description of the Task created via IBM Cloud Function"
 }
 ```
 
