@@ -68,7 +68,7 @@ Now it is time to create our first issue via Postman and the [Jira REST API](htt
 
 If you get a 201 Created response you should be able to see the new issue in your backlog inside your Jira project.
 
-One more step: After the successful Post request, click the code button in postman, select native Node.Js and copy the code.
+One more step: After the successful Post Request, click the code button in Postman, select native Node.Js and copy the code.
 
 ![Native NodeJS Code](readme_images/native-nodeJS-code.png)
 
