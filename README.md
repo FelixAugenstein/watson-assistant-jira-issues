@@ -12,7 +12,7 @@
 
 ## Set up your Jira Account
 
-1. You will be required to set up your domain, for instance https://my-domain-name.atlassian.net.
+1. You will be required to set up your domain, for instance `my-domain-name.atlassian.net`.
 2. Then you can set up projects. Create a project an make sure to find out the project ID. It can be found by going to view all projects and inspecting the element, the corresponding project ID is in the image.
  - For the first created project the ID is usually 10000
  - For the second created project the ID is usually 10001
