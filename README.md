@@ -25,7 +25,7 @@
 
 ## Use Postman to test the Jira API with your project
 
-Now it is time to create our first issue via Postman and the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/). The corresponding documentation can be found [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-post).
+Now it is time to create our first issue via Postman and the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/). The corresponding documentation to create an issue can be found [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-post).
 
 ![Postman Test](readme_images/postman-test.png)
 
@@ -68,6 +68,10 @@ Now it is time to create our first issue via Postman and the [Jira REST API](htt
 
 If you get a 201 Created response you should be able to see the new issue in your backlog inside your Jira project.
 
+One more step: After the successful Post request, click the code button in postman, select native Node.Js and copy the code.
+
+![Native NodeJS Code](readme_images/native-nodeJS-code.png)
+
 ## Set up the cloud function
 
 Go back to your IBM Cloud Dashboard. Click the Cloud Functions button, then go to Actions and click create, to create a new action.
@@ -78,9 +82,13 @@ Give your action a name, keep the Default Package and choose Node.js as your run
 
 ![Create Cloud Function Action](readme_images/create-cloud-function.png)
 
-Copy and paste the `ticket-system-with-cloudant-db.js` code and provide your credentials and database name. From your credentials copy and paste the url and apikey. Then copy and paste your database name.
+Copy and paste the `create-jira-issue.js` code. Now you need to provide some elements from the native Node.Js code you copied from Postman:
 
-![Provide Credentials DB](readme_images/provide-credentials-db.png)
+- The correct hostname
+- The header Authorization
+- The header Cookie
+
+![Provide your data](readme_images/provide-your-data.png)
 
 Now you can test your Cloud Function to make sure everything works fine. Therefore save it and click Invoke with Parameters, provide the input below, and click Apply, then click Invoke. Results are shown in the Activations pane. (HD in the description stands for help desk).
 
