@@ -84,7 +84,7 @@ Give your action a name, keep the Default Package and choose Node.js - for insta
 
 ![Create Cloud Function Action](readme_images/create-cloud-function.png)
 
-Copy and paste the `create-jira-issue.js` code. Now you need to provide some properties from the native Node.Js code you copied from Postman:
+Copy and paste the `create-jira-issue.js` code (The file is included on top of this page). Now you need to provide some properties from the native Node.Js code you copied from Postman:
 
 - Correct hostname
 - Header Authorization
