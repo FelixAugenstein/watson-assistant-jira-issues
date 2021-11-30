@@ -22,6 +22,19 @@
 
 3. Finally, you need to create a new API token. Therefore, go to Account Settings --> Security --> Create and manage API tokens, then create a new API token. Choose a label, copy the generated token and save it for later.
 
+## Verify the issuetype ID
+
+We want to be able to create three different types of issues, which are called `Story`, `Bug`, and `Task`. In order to use them you might need to create them first.
+
+Open your project in Jira then goto `project settings`->`Issuetypes`. If you can see the three types (on the left side), click on each of them and write down their IDs. The IDs can be found in the link of the site you are on.
+
+The link should look something like this:
+
+`https://YOUR_WORKSPACE.atlassian.net/jira/software/projects/YOUR_PROJECT/settings/issuetypes/10004`
+
+In this example the issuetype ID would be 10004.
+
+If you can't see the three Issuetypes mentioned above, you first need to create them (via the button on the left side).
 
 ## Use Postman to test the Jira API with your project
 
@@ -33,7 +46,7 @@ Now it is time to create our first issue via Postman and the [Jira REST API](htt
 2. Add a new request.
 3. Select POST to make a new Post Request and provide the correct endpoint to create a new issue, with your specific domain: `https://YOUR_NAME_HERE.atlassian.net/rest/api/3/issue/`.
 4. Under Authorization select Basic Auth as type and provide your email you used to register as the username and your created API token as password.
-5. Then go to Body, select raw and paste in the following code. Make sure to provide your correct project ID. 
+5. Then go to Body, select raw, set the content type to `JSON` and paste in the following code. Make sure to provide your correct project ID, and one of the issue IDs.  
 
 ```
 {
@@ -42,7 +55,7 @@ Now it is time to create our first issue via Postman and the [Jira REST API](htt
             "id": "YOUR_PROJECT_ID_HERE"
         },
         "issuetype": {
-            "id": "10003"
+            "id": "YOUR_ISSUE_ID_HERE"
         },
         "summary": "New Bug created via Postman",
         "description": {
@@ -68,7 +81,9 @@ Now it is time to create our first issue via Postman and the [Jira REST API](htt
 
 If you get a 201 Created response you should be able to see the new issue in your backlog inside your Jira project.
 
-If you get a 400 Bad request response change the issuetype below the project id to 10001 or 10002.
+If you get a 400 Bad request response change the issuetype below the project id to some other ID (for example 10001 or 10002).
+
+
 
 One more step: After the successful Post Request, click the code button in Postman, select native Node.Js and copy the code.
 
@@ -95,15 +110,16 @@ Check all the lines in the code where it says 'YOUR INPUT REQUIRED HERE' and pro
 
 ![Provide your data](readme_images/provide-your-data.png)
 
-Now you can test your Cloud Function to make sure everything works fine. Therefore, save it and click Invoke with Parameters, provide the input below, and click Apply, then click Invoke. Results are shown in the Activations pane. In Jira your new issue should be created.
+Now you can test your Cloud Function to make sure everything works fine. Therefore, save it and click Invoke with Parameters, provide the input below, paste in one of your issuetype IDs, and click Apply, then click Invoke. Results are shown in the Activations pane. In Jira your new issue should be created.
 
 ```
 {
-  "jiraIssueType": "10002",
+  "jiraIssueType": "YOUR_ISSUE_TYPE_ID",
   "jiraIssueSummary": "New Task created via IBM Cloud Function", 
   "jiraIssueDescription": "Description of the Task created via IBM Cloud Function"
 }
 ```
+
 
 Now go to Endpoints, enable it as a Web Action, save and copy the provided URL. You will need it later on, when setting up your Watson Assistant.
 
@@ -124,6 +140,19 @@ Go to skills and create a new skill, when asked choose the dialog skill. Select 
 Click options and then select Webhooks. Provide the Web Action URL you obtained when creating the Endpoint. Make sure to add a `.json` at the end.
 
 ![Add Webhook with JSON](readme_images/add-webhook-dotjson.png)
+
+Now go to Entities -> My Entities and click on @jiraIssueType. In the table you can see which words are mapped to which issuetype ID. 
+
+Right now it should look like this:
+
+
+| Values  | Type  |
+|---      |---    |
+| 10001 | Story |
+| 10002 | Task |
+| 10003 | Bug |
+
+The values collum shows the Issuetype ID, the Type colllum shows the Issue's name as well as its Synonyms. In order for Watson assistant to create the correct issue, you need to change the ID to the ones you wrote down earlier.
 
 Now you can go to the dialog and try it out for yourself. You can create a new issue and verify it in your Jira project.
 
