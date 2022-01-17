@@ -135,6 +135,8 @@ Afterwards launch your Watson Assistant Service, you will find it on your dashbo
 
 Go to skills and create a new skill, when asked choose the dialog skill. Select import skill and upload the `skill-create-Jira-Issues.json` file.
 
+> If you can't find `skills`, click on the profile icon in the upper right corner, and click `Switch to classic experience`.
+
 ![Import Skill](readme_images/import-skill.png)
 
 Click options and then select Webhooks. Provide the Web Action URL you obtained when creating the Endpoint. Make sure to add a `.json` at the end.
